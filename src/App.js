@@ -1,9 +1,36 @@
-import React, { useState }  from "react";
+import React, { useEffect, useState }  from "react";
 import "./App.scss";
 
 const App = () => {
-  // const [curChar, setCurChar] = useState('')
+  const [curChar, setCurChar] = useState('')
+  const [textTap, setTextTap] =useState('  __  ')
+  const [textMap, setTextMap] =useState('  __  ')
+  const [textPat, setTextPat] =useState('  __  ')
 
+const settingCharTap = () => {
+  curChar === 'a' ? setTextTap('a') : curChar === 'p' ? setTextTap('   wrong!!!   ') : setTextTap('  __  ')
+}
+
+const settingCharMap = () => {
+  curChar === 'a' ? setTextMap('a') : curChar === 'p' ? setTextMap('   wrong!!!   ') : setTextMap('  __  ')
+}
+
+const settingCharPat = () => {
+  curChar === 'p' ? setTextPat('p') : curChar === 'a' ? setTextPat('   wrong!!!   ') : setTextPat('  __  ')
+}
+
+
+const refresh = () => {
+  setTextMap('  __  ')
+  setTextPat('  __  ')
+  setTextTap('  __  ')
+}
+
+const eye = () => {
+  setTextMap('a')
+  setTextPat('p')
+  setTextTap('a')
+}
 
 
 
@@ -40,14 +67,14 @@ const App = () => {
       </header>
       <div className="container">
         <div className="question-container">
-          {/* <button onClick={() => setCurChar('a')} className="question question-1">a</button>
-          <button onClick={() => setCurChar('p')} className="question question-2">p</button> */}
+          <button onClick={() => setCurChar('a')} className="question question-1">a</button>
+          <button onClick={() => setCurChar('p')} className="question question-2">p</button>
         </div>
         <div className="option-container">
           <div className="line">
               <div className="opt1">
               <div className="opt-text">
-                {/* <span className="optClick"> 1 {curChar === 'a'? `t ${curChar} p` : 't _ p'} </span>{" "} */}
+                <span onClick={() => settingCharTap()} className="optClick"> 1  t{textTap}p </span>{" "}
               </div>
               <img
                 alt="tap"
@@ -59,7 +86,7 @@ const App = () => {
 
              
               <div className="opt-text">
-                <span className="optClick">2 __at</span>{" "}
+                <span onClick={() => settingCharPat()} className="optClick">2  {textPat}at</span>{" "}
               </div>
               <img
               alt="pat"
@@ -72,7 +99,7 @@ const App = () => {
           <div className="line">
             <div className="opt3">
             <div className="opt-text">
-            <span className="optClick">3 m__p</span>{" "}
+            <span onClick={() => settingCharMap()} className="optClick">3  m{textMap}p</span>{" "}
             </div>
             <img
               alt="map"
@@ -87,12 +114,14 @@ const App = () => {
         <div className="footer">
           <div className="refresh">
             <img
+            onClick={() => refresh()}
               alt="refresh"
               src="https://educationalrc.org/tasks/3/assets/images/replay_icon.png"
             />
           </div>
           <div className="eye">
             <img
+             onClick={() => eye()}
               alt="eye"
               src="https://educationalrc.org/tasks/3/assets/images/showAns_icon.png"
             />
