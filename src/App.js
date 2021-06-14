@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Fade from "react-reveal/Fade";
-import Zoom from "react-modal";
-import Modal from "react-modal";
+import Modal from "./Modal";
+import ModalHelp from "./ModalHelp";
 import "./App.scss";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -17,20 +17,10 @@ const App = () => {
   const [textTap, setTextTap] = useState(" __ ");
   const [textMap, setTextMap] = useState(" __ ");
   const [textPat, setTextPat] = useState(" __ ");
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenHelp, setIsOpenHelp] = useState(false);
 
   library.add(fab, faCheckSquare, faTimes, faTimesCircle);
-
-  // const [modalIsOpen,setIsOpen] = useState(false);
-  // function openModal() {
-  //   setIsOpen(true);
-  // }
-
-  // function afterOpenModal() {
-  // }
-
-  // function closeModal(){
-  //   setIsOpen(false);
-  // }
 
   const settingCharTap = () => {
     curChar === "a"
@@ -60,12 +50,14 @@ const App = () => {
     setTextMap(" __ ");
     setTextPat(" __ ");
     setTextTap(" __ ");
+    setCurChar("");
   };
 
   const eye = () => {
     setTextMap("a");
     setTextPat("p");
     setTextTap("a");
+    setCurChar("");
   };
 
   return (
@@ -79,18 +71,33 @@ const App = () => {
             <div className="up-imgs">
               <div className="resource">
                 <img
-                  //  onClick={() => openModal()}
+                  onClick={() => setIsOpen(true)}
                   src="https://educationalrc.org/tasks/3/assets/images/resourse_icon.png"
                   className="img-responsive"
                   alt="resource"
                 ></img>
+                <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                  <img
+                    className="portalImg"
+                    alt="dummy"
+                    src="https://educationalrc.org/tasks/3/assets/images/dummy.jpg"
+                  />
+                </Modal>
               </div>
               <div className="help">
                 <img
+                  onClick={() => setIsOpenHelp(true)}
                   src="https://educationalrc.org/tasks/3/assets/images/help_icon.png"
                   className="img-responsive"
                   alt="help"
                 ></img>
+
+                <ModalHelp
+                  open={isOpenHelp}
+                  onClose={() => setIsOpenHelp(false)}
+                >
+                  <h1>Help content goes here</h1>
+                </ModalHelp>
               </div>
             </div>
           </div>
@@ -99,13 +106,13 @@ const App = () => {
           <div className="question-container">
             <button
               onClick={() => setCurChar("a")}
-              className="question question-1"
+              className={`${curChar === "a" ? "focus" : "question"}`}
             >
               a
             </button>
             <button
               onClick={() => setCurChar("p")}
-              className="question question-2"
+              className={`${curChar === "p" ? "focus" : "question"}`}
             >
               p
             </button>
@@ -117,9 +124,9 @@ const App = () => {
                   <span onClick={() => settingCharTap()} className="optClick">
                     {" "}
                     {textTap === "a" ? (
-                      <FontAwesomeIcon className='right' icon="check-square" />
+                      <FontAwesomeIcon className="right" icon="check-square" />
                     ) : textTap === "  NO " ? (
-                      <FontAwesomeIcon className='false' icon="times-circle" />
+                      <FontAwesomeIcon className="false" icon="times-circle" />
                     ) : (
                       ""
                     )}
@@ -150,9 +157,9 @@ const App = () => {
                 <div className="opt-text">
                   <span onClick={() => settingCharMap()} className="optClick">
                     {textMap === "a" ? (
-                      <FontAwesomeIcon className='right' icon="check-square" />
+                      <FontAwesomeIcon className="right" icon="check-square" />
                     ) : textMap === "  NO " ? (
-                      <FontAwesomeIcon className='false' icon="times-circle" />
+                      <FontAwesomeIcon className="false" icon="times-circle" />
                     ) : (
                       ""
                     )}
@@ -184,10 +191,10 @@ const App = () => {
               <div className="opt2">
                 <div className="opt-text">
                   <span onClick={() => settingCharPat()} className="optClick">
-                    {textPat === "a" ? (
-                      <FontAwesomeIcon className='right' icon="check-square" />
+                    {textPat === "p" ? (
+                      <FontAwesomeIcon className="right" icon="check-square" />
                     ) : textPat === "  NO " ? (
-                      <FontAwesomeIcon className='false' icon="times-circle" />
+                      <FontAwesomeIcon className="false" icon="times-circle" />
                     ) : (
                       ""
                     )}
@@ -235,23 +242,8 @@ const App = () => {
           </div>
         </footer>
       </Fade>
-
-      {/* <Modal
-          isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
-         
-          
-        ></Modal> */}
     </div>
   );
 };
 
 export default App;
-
-// const dummy = (
-//   <img
-//     alt="dummy"
-//     src="https://educationalrc.org/tasks/3/assets/images/dummy.jpg"
-//   />
-// );
