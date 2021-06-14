@@ -34,15 +34,17 @@
       position: relative;
       float: right;
       padding: 1vw;
-    }
-
-    & img {
-      position: absolute;
+      
       width: 5vw;
       height: 10vh;
       cursor: pointer;
     }
   }
+}
+
+ .portalImg {
+  max-height: 50%;
+  max-width: 50%;
 }
 
 .container {
@@ -62,7 +64,7 @@
   & .question-container {
     margin: 5% auto;
 
-    & .question {
+    & .question, .focus {
       cursor: pointer;
       margin: 1%;
       background: none;
@@ -73,10 +75,11 @@
       font-weight: 800;
       width: 7%;
 
-      &:focus {
+      }
+      
+      & .focus {
         background: #0FA0C5;
         color: #fff;
-      }
     }
   }
 
