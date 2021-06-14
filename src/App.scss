@@ -46,11 +46,11 @@
 }
 
 .container {
-  max-width: 65%;
-  min-height: 100%;
+  max-width: 60%;
+  max-height: 80%;
   border: 0.6vh solid #f5821f;
   border-radius: 4vh;
-  margin: 3rem auto;
+  margin: 2rem auto;
 
   & .option-container,
   & .question-container {
@@ -71,6 +71,12 @@
       padding: 1.5% 1%;
       font-size: 200%;
       font-weight: 800;
+      width: 7%;
+
+      &:focus {
+        background: #0FA0C5;
+        color: #fff;
+      }
     }
   }
 
@@ -92,6 +98,28 @@
   display: inline-block;
   font-weight: bold;
   text-align: center;
+}
+
+& .opt-text {
+  font-size: 3rem;
+
+  & .answer {
+    text-decoration: underline;
+    color: green;
+  }
+
+  & .not-answer {
+    text-decoration: underline;
+    color: red;
+  }
+
+  & .right {
+    color: green;
+  }
+
+  & .false {
+    color: red;
+  }
 }
 
 }
