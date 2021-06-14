@@ -45,7 +45,7 @@ const App = () => {
 
   const settingCharTap = () => {
     curChar === "a"
-      ? (function() {setTextTap("a"); playCorrect()})()
+      ? (function() {setTextTap("a"); playCorrect(); setCurChar('')})()
       : curChar === "p"
       ? (function() {setTextTap("  p "); playIncorrect()})()
       : setTextTap(" __ ");
@@ -53,7 +53,7 @@ const App = () => {
 
   const settingCharMap = () => {
     curChar === "a"
-      ? (function() {setTextMap("a"); playCorrect()})()
+      ? (function() {setTextMap("a"); playCorrect(); setCurChar('')})()
       : curChar === "p"
       ? (function() {setTextMap("  p "); playIncorrect()})()
       : setTextMap(" __ ");
@@ -61,7 +61,7 @@ const App = () => {
 
   const settingCharPat = () => {
     curChar === "p"
-    ? (function() {setTextPat("p"); playCorrect()})()
+    ? (function() {setTextPat("p"); playCorrect(); setCurChar('')})()
     : curChar === "a"
     ? (function() {setTextPat("  a "); playIncorrect()})()
     : setTextPat(" __ ");
