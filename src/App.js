@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Fade from "react-reveal/Fade";
 import Modal from "./Modal";
 import ModalHelp from "./ModalHelp";
@@ -11,6 +11,8 @@ import {
   faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import HashLoader from "react-spinners/HashLoader";
+
 
 const App = () => {
   const [curChar, setCurChar] = useState("");
@@ -19,6 +21,14 @@ const App = () => {
   const [textPat, setTextPat] = useState(" __ ");
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenHelp, setIsOpenHelp] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000);
+  }, [])
 
   library.add(fab, faCheckSquare, faTimes, faTimesCircle);
 
@@ -62,7 +72,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <Fade right cascade>
+      {
+        loading ? <div className='preload'> <HashLoader color={'#0FA0C5'} loading={loading} size={130} /> </div>
+        :
+        <Fade right cascade>
         <header>
           <div className="header">
             <div className="title">
@@ -102,6 +115,7 @@ const App = () => {
             </div>
           </div>
         </header>
+        <div className="back">
         <div className="container">
           <div className="question-container">
             <button
@@ -223,6 +237,7 @@ const App = () => {
             </div>
           </div>
         </div>
+        
         <footer>
           <div className="footer">
             <div className="refresh">
@@ -241,7 +256,11 @@ const App = () => {
             </div>
           </div>
         </footer>
+        </div>
+
       </Fade>
+      }
+    
     </div>
   );
 };

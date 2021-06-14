@@ -2,10 +2,23 @@
   box-sizing: border-box;
 }
 
-.app {
-  position: relative;
-  width: 100vh;
+// html, body {
+//   width: 100%;
+//   height: 100vh;
+// }
+
+// .App {
+//   max-width: 80%;
+//   max-height: 80%;
+// }
+
+.preload {
+    width: 100%;
   height: 100vh;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .header,
@@ -34,7 +47,7 @@
       position: relative;
       float: right;
       padding: 1vw;
-      
+
       width: 5vw;
       height: 10vh;
       cursor: pointer;
@@ -42,17 +55,25 @@
   }
 }
 
- .portalImg {
+.portalImg {
   max-height: 50%;
   max-width: 50%;
 }
 
+.back {
+  background-image: linear-gradient(to bottom, #0fa0c5, #0fa0c5 85%, rgb(222,236,246) 50%);
+
+
+
+}
+
 .container {
-  max-width: 60%;
-  max-height: 80%;
+   max-width: 60%;
+   max-height: 80%;
   border: 0.6vh solid #f5821f;
   border-radius: 4vh;
   margin: 2rem auto;
+  background-color: #fff;
 
   & .option-container,
   & .question-container {
@@ -64,72 +85,68 @@
   & .question-container {
     margin: 5% auto;
 
-    & .question, .focus {
+    & .question,
+    .focus {
       cursor: pointer;
       margin: 1%;
       background: none;
-      border: .4vh solid #0FA0C5;
+      border: 0.4vh solid #0fa0c5;
       border-radius: 20%;
       padding: 1.5% 1%;
       font-size: 200%;
       font-weight: 800;
       width: 7%;
+    }
 
-      }
-      
-      & .focus {
-        background: #0FA0C5;
-        color: #fff;
+    & .focus {
+      background: #0fa0c5;
+      color: #fff;
     }
   }
 
   & .option-container {
-     width: 65%;
-     height: 65%;
-     margin: 4rem auto;
+    width: 65%;
+    height: 65%;
+    margin: 4rem auto;
   }
 
- & img {
+  & img {
     width: 70%;
     height: 70%;
     margin: 5%;
   }
 
   & .line {
+    & .optClick {
+      display: inline-block;
+      font-weight: bold;
+      text-align: center;
+    }
 
-& .optClick {
-  display: inline-block;
-  font-weight: bold;
-  text-align: center;
+    & .opt-text {
+      font-size: 3rem;
+
+      & .answer {
+        text-decoration: underline;
+        color: green;
+      }
+
+      & .not-answer {
+        text-decoration: underline;
+        color: red;
+      }
+
+      & .right {
+        color: green;
+      }
+
+      & .false {
+        color: red;
+      }
+    }
+  }
 }
 
-& .opt-text {
-  font-size: 3rem;
-
-  & .answer {
-    text-decoration: underline;
-    color: green;
-  }
-
-  & .not-answer {
-    text-decoration: underline;
-    color: red;
-  }
-
-  & .right {
-    color: green;
-  }
-
-  & .false {
-    color: red;
-  }
-}
-
-}
-}
-
-.footer {
-  & img {
+.footer > img {
     cursor: pointer;
-  }
 }
