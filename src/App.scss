@@ -126,14 +126,20 @@
     & .opt-text {
       font-size: 3rem;
 
+      & span{
+        cursor: pointer;
+      }
+
       & .answer {
         text-decoration: underline;
         color: green;
+        cursor: default;
       }
 
       & .not-answer {
         text-decoration: underline;
         color: red;
+        cursor: default;
       }
 
       & .right {
