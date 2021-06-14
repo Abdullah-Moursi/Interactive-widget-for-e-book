@@ -47,7 +47,7 @@ const App = () => {
     curChar === "a"
       ? (function() {setTextTap("a"); playCorrect()})()
       : curChar === "p"
-      ? (function() {setTextTap("  NO "); playIncorrect()})()
+      ? (function() {setTextTap("  p "); playIncorrect()})()
       : setTextTap(" __ ");
   };
 
@@ -55,7 +55,7 @@ const App = () => {
     curChar === "a"
       ? (function() {setTextMap("a"); playCorrect()})()
       : curChar === "p"
-      ? (function() {setTextMap("  NO "); playIncorrect()})()
+      ? (function() {setTextMap("  p "); playIncorrect()})()
       : setTextMap(" __ ");
   };
 
@@ -63,7 +63,7 @@ const App = () => {
     curChar === "p"
     ? (function() {setTextPat("p"); playCorrect()})()
     : curChar === "a"
-    ? (function() {setTextPat("  NO "); playIncorrect()})()
+    ? (function() {setTextPat("  a "); playIncorrect()})()
     : setTextPat(" __ ");
   };
 
@@ -150,7 +150,7 @@ const App = () => {
                     {" "}
                     {textTap === "a" ? (
                       <FontAwesomeIcon className="right" icon="check-square" />
-                    ) : textTap === "  NO " ? (
+                    ) : textTap === "  p " ? (
                       <FontAwesomeIcon className="false" icon="times-circle" />
                     ) : (
                       ""
@@ -161,7 +161,7 @@ const App = () => {
                         className={`${
                           textTap === " __ "
                             ? ""
-                            : textTap === "  NO "
+                            : textTap === "  p "
                             ? "not-answer"
                             : "answer"
                         }`}
@@ -183,7 +183,7 @@ const App = () => {
                   <span onClick={() => settingCharMap()} className="optClick">
                     {textMap === "a" ? (
                       <FontAwesomeIcon className="right" icon="check-square" />
-                    ) : textMap === "  NO " ? (
+                    ) : textMap === "  p " ? (
                       <FontAwesomeIcon className="false" icon="times-circle" />
                     ) : (
                       ""
@@ -194,7 +194,7 @@ const App = () => {
                         className={`${
                           textMap === " __ "
                             ? ""
-                            : textMap === "  NO "
+                            : textMap === "  p "
                             ? "not-answer"
                             : "answer"
                         }`}
@@ -218,7 +218,7 @@ const App = () => {
                   <span onClick={() => settingCharPat()} className="optClick">
                     {textPat === "p" ? (
                       <FontAwesomeIcon className="right" icon="check-square" />
-                    ) : textPat === "  NO " ? (
+                    ) : textPat === "  a " ? (
                       <FontAwesomeIcon className="false" icon="times-circle" />
                     ) : (
                       ""
@@ -229,7 +229,7 @@ const App = () => {
                         className={`${
                           textPat === " __ "
                             ? ""
-                            : textPat === "  NO "
+                            : textPat === "  a "
                             ? "not-answer"
                             : "answer"
                         }`}
