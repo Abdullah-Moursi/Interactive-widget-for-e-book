@@ -147,6 +147,13 @@
   }
 }
 
-.footer > img {
+.footer {
+  .eye {
+    padding-left: 30%;
+  }
+
+  & img {
     cursor: pointer;
 }
+} 
+
