@@ -12,6 +12,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import HashLoader from "react-spinners/HashLoader";
+import correct from '../src/correct.mp3';
+import incorrect from '../src/incorrect.mp3';
 
 
 const App = () => {
@@ -32,28 +34,37 @@ const App = () => {
 
   library.add(fab, faCheckSquare, faTimes, faTimesCircle);
 
+
+  const playCorrect = () => {
+    new Audio(correct).play();
+  }
+
+  const playIncorrect = () => {
+    new Audio(incorrect).play();
+  }
+
   const settingCharTap = () => {
     curChar === "a"
-      ? setTextTap("a")
+      ? (function() {setTextTap("a"); playCorrect()})()
       : curChar === "p"
-      ? setTextTap("  NO ")
+      ? (function() {setTextTap("  NO "); playIncorrect()})()
       : setTextTap(" __ ");
   };
 
   const settingCharMap = () => {
     curChar === "a"
-      ? setTextMap("a")
+      ? (function() {setTextMap("a"); playCorrect()})()
       : curChar === "p"
-      ? setTextMap("  NO ")
+      ? (function() {setTextMap("  NO "); playIncorrect()})()
       : setTextMap(" __ ");
   };
 
   const settingCharPat = () => {
     curChar === "p"
-      ? setTextPat("p")
-      : curChar === "a"
-      ? setTextPat("  NO ")
-      : setTextPat(" __ ");
+    ? (function() {setTextPat("p"); playCorrect()})()
+    : curChar === "a"
+    ? (function() {setTextPat("  NO "); playIncorrect()})()
+    : setTextPat(" __ ");
   };
 
   const refresh = () => {
