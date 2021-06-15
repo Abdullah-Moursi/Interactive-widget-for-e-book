@@ -16,14 +16,16 @@ import correct from '../src/correct.mp3';
 import incorrect from '../src/incorrect.mp3';
 
 
+
+
 const App = () => {
   const [curChar, setCurChar] = useState("");
-  const [textTap, setTextTap] = useState(" __ ");
-  const [textMap, setTextMap] = useState(" __ ");
-  const [textPat, setTextPat] = useState(" __ ");
+
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenHelp, setIsOpenHelp] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [text, setText] = useState(' __ ')
+  // const [pale, setPale] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -35,51 +37,63 @@ const App = () => {
   library.add(fab, faCheckSquare, faTimes, faTimesCircle);
 
 
-  const playCorrect = () => {
-    new Audio(correct).play();
-  }
+  const data = [
+    { word: `1 t  ${text}  p`, right: "a", wrong:'p', id: 1, img: {
+      alt: 'tap',
+      src: "https://educationalrc.org/tasks/3/assets/images/p19e24/p19ex24q1_1.png"
+    }
+  },
+    { word: `2    ${text}  at`, right: "p", wrong:'a', id: 2, img: {
+      alt: 'pat',
+      src: "https://educationalrc.org/tasks/3/assets/images/p19e24/p19ex24q1_2.png"
+    }
+},
+    { word: `3 m  ${text}  p`, right: "a", wrong:'p', id: 3, img : {
+      alt: 'map',
+      src:"https://educationalrc.org/tasks/3/assets/images/p19e24/p19ex24q1_3.png"
+    }
+   },
+  ];
 
-  const playIncorrect = () => {
-    new Audio(incorrect).play();
-  }
-
-  const settingCharTap = () => {
-    curChar === "a"
-      ? (function() {setTextTap("a"); playCorrect(); setCurChar('')})()
-      : curChar === "p"
-      ? (function() {setTextTap("  p "); playIncorrect()})()
-      : setTextTap(" __ ");
-  };
-
-  const settingCharMap = () => {
-    curChar === "a"
-      ? (function() {setTextMap("a"); playCorrect(); setCurChar('')})()
-      : curChar === "p"
-      ? (function() {setTextMap("  p "); playIncorrect()})()
-      : setTextMap(" __ ");
-  };
-
-  const settingCharPat = () => {
-    curChar === "p"
-    ? (function() {setTextPat("p"); playCorrect(); setCurChar('')})()
-    : curChar === "a"
-    ? (function() {setTextPat("  a "); playIncorrect()})()
-    : setTextPat(" __ ");
-  };
 
   const refresh = () => {
-    setTextMap(" __ ");
-    setTextPat(" __ ");
-    setTextTap(" __ ");
+    setText(" __ ");
     setCurChar("");
   };
 
   const eye = () => {
-    setTextMap("a");
-    setTextPat("p");
-    setTextTap("a");
+    data.map(({right}) => (
+      setText(right)
+    ))
     setCurChar("");
+  }
+
+
+
+
+
+
+
+
+
+  const playAudio = (audio) => {
+    new Audio(audio).play();
+  }
+
+
+  const settingChar = (right, wrong) => {
+
+    curChar === right
+      ? (function() {setText(right); playAudio(correct); setCurChar('') })()
+      : curChar === wrong
+      ? (function() {setText(`  ${wrong} `); playAudio(incorrect); setTimeout(() => {setText(' __ ')}, 500)})()
+      : setText(" __ ")  
   };
+
+
+
+
+
 
   return (
     <div className="App">
@@ -146,109 +160,51 @@ const App = () => {
             <div className="line">
               <div className="opt1">
                 <div className="opt-text">
-                  <span onClick={() => settingCharTap()} className="optClick">
-                    {" "}
-                    {textTap === "a" ? (
-                      <FontAwesomeIcon className="right" icon="check-square" />
-                    ) : textTap === "  p " ? (
-                      <FontAwesomeIcon className="false" icon="times-circle" />
-                    ) : (
-                      ""
-                    )}
-                    1 t
-                    {
-                      <span
-                        className={`${
-                          textTap === " __ "
-                            ? ""
-                            : textTap === "  p "
-                            ? "not-answer"
-                            : "answer"
-                        }`}
-                      >
-                        {textTap}
-                      </span>
-                    }
-                    p{" "}
-                  </span>{" "}
-                </div>
-                <img
-                  alt="tap"
-                  src="https://educationalrc.org/tasks/3/assets/images/p19e24/p19ex24q1_1.png"
-                />
-              </div>
 
-              <div className="opt3">
-                <div className="opt-text">
-                  <span onClick={() => settingCharMap()} className="optClick">
-                    {textMap === "a" ? (
-                      <FontAwesomeIcon className="right" icon="check-square" />
-                    ) : textMap === "  p " ? (
-                      <FontAwesomeIcon className="false" icon="times-circle" />
-                    ) : (
-                      ""
-                    )}
-                    3 m
-                    {
-                      <span
-                        className={`${
-                          textMap === " __ "
-                            ? ""
-                            : textMap === "  p "
-                            ? "not-answer"
-                            : "answer"
-                        }`}
-                      >
-                        {textMap}
-                      </span>
-                    }
-                    p
-                  </span>{" "}
-                </div>
-                <img
-                  alt="map"
-                  src="https://educationalrc.org/tasks/3/assets/images/p19e24/p19ex24q1_3.png"
-                />
-              </div>
-            </div>
 
-            <div className="line">
-              <div className="opt2">
-                <div className="opt-text">
-                  <span onClick={() => settingCharPat()} className="optClick">
-                    {textPat === "p" ? (
-                      <FontAwesomeIcon className="right" icon="check-square" />
-                    ) : textPat === "  a " ? (
-                      <FontAwesomeIcon className="false" icon="times-circle" />
-                    ) : (
-                      ""
-                    )}
-                    2{" "}
-                    {
-                      <span
-                        className={`${
-                          textPat === " __ "
-                            ? ""
-                            : textPat === "  a "
-                            ? "not-answer"
-                            : "answer"
+
+
+
+
+
+                  {data.map(({ word, right, wrong, img, id}) => (
+                    <span 
+                    key={id}
+                    onClick={() => settingChar(right, wrong)} className="optClick">
+                      {text === right ? (
+                       <FontAwesomeIcon className="right" icon="check-square" />
+                      ) : text === wrong ? (
+                        <FontAwesomeIcon className="false" icon="times-circle" />
+                      ) : (
+                        ""
+                      )}
+                      {
+                        <span className={`${
+                          text === " __ " ? '' :text === wrong ? 'not-answer' : 'answer'
                         }`}
-                      >
-                        {textPat}
-                      </span>
-                    }
-                    at
-                  </span>{" "}
+                        >
+                          <img src={img.src} alt={img.alt} />
+                          {word}
+                          </span>
+                      }
+                    </span>
+                  ))}
+
+
+
+
+
+
+
+
+
+
+                  
                 </div>
-                <img
-                  alt="pat"
-                  src="https://educationalrc.org/tasks/3/assets/images/p19e24/p19ex24q1_2.png"
-                />
-              </div>
-            </div>
+                </div>
+                </div>
           </div>
-        </div>
-        
+         </div>
         <footer>
           <div className="footer">
             <div className="refresh">
@@ -273,7 +229,220 @@ const App = () => {
       }
     
     </div>
-  );
-};
+  ) }
 
 export default App;
+
+
+
+
+
+  // const eye = (right) => {
+  //   data.map(() => {
+  //     ..., word: right
+  //   })
+  //   setText(right)
+  //   setCurChar("");
+  // };
+
+  // const settingPale = () => {
+  //   setPale(true)
+  // }
+
+  // if( curChar === 'p') {settingPale()}
+
+  //TextMap === "a" && TextPat === "p" && TextTap === "a" &&
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //               {/* <span onClick={(id) => settingChar('a', 'p', id)} className="optClick">
+    //                 {" "}
+    //                 {text === "a" ? (
+    //                   <FontAwesomeIcon className="right" icon="check-square" />
+    //                 ) : text === "  p " ? (
+    //                   <FontAwesomeIcon className="false" icon="times-circle" />
+    //                 ) : (
+    //                   ""
+    //                 )}
+    //                 1 t
+    //                 {
+    //                   <span
+    //                     className={`${
+    //                       text === " __ "
+    //                         ? ""
+    //                         : text === "  p "
+    //                         ? "not-answer"
+    //                         : "answer"
+    //                     }`}
+    //                   >
+    //                     {text}
+    //                   </span>
+    //                 }
+    //                 p{" "}
+    //               </span>{" "}
+    //             </div>
+    //             <img
+    //               alt="tap"
+    //               src="https://educationalrc.org/tasks/3/assets/images/p19e24/p19ex24q1_1.png"
+    //             />
+    //           </div>
+
+    //           <div className="opt3">
+    //             <div className="opt-text">
+    //               <span onClick={(id) => settingChar('a', 'p', id)} className="optClick">
+    //                 {text === "a" ? (
+    //                   <FontAwesomeIcon className="right" icon="check-square" />
+    //                 ) : text === "  p " ? (
+    //                   <FontAwesomeIcon className="false" icon="times-circle" />
+    //                 ) : (
+    //                   ""
+    //                 )}
+    //                 3 m
+    //                 {
+    //                   <span
+    //                     className={`${
+    //                       text === " __ "
+    //                         ? ""
+    //                         : text === "  p "
+    //                         ? "not-answer"
+    //                         : "answer"
+    //                     }`}
+    //                   >
+    //                     {text}
+    //                   </span>
+    //                 }
+    //                 p
+    //               </span>{" "}
+    //             </div>
+    //             <img
+    //               alt="map"
+    //               src="https://educationalrc.org/tasks/3/assets/images/p19e24/p19ex24q1_3.png"
+    //             />
+    //           </div>
+    //         </div>
+
+    //         <div className="line">
+    //           <div className="opt2">
+    //             <div className="opt-text">
+    //               <span onClick={(id) => settingChar('p', 'a', id)} className="optClick">
+    //                 {text === "p" ? (
+    //                   <FontAwesomeIcon className="right" icon="check-square" />
+    //                 ) : text === "  a " ? (
+    //                   <FontAwesomeIcon className="false" icon="times-circle" />
+    //                 ) : (
+    //                   ""
+    //                 )}
+    //                 2{" "}
+    //                 {
+    //                   <span
+    //                     className={`${
+    //                       text === " __ "
+    //                         ? ""
+    //                         : text === "  a "
+    //                         ? "not-answer"
+    //                         : "answer"
+    //                     }`}
+    //                   >
+    //                     {text}
+    //                   </span>
+    //                 }
+    //                 at
+    //               </span>{" "}
+    //             </div>
+    //             <img
+    //               alt="pat"
+    //               src="https://educationalrc.org/tasks/3/assets/images/p19e24/p19ex24q1_2.png"
+    //             />
+    //           </div>
+    //         </div> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const settingCharTap = () => {
+  //   curChar === "a"
+  //     ? (function() {setTextTap("a"); playAudio(correct); setCurChar('') })()
+  //     : curChar === "p"
+  //     ? (function() {setTextTap("  p "); playAudio(incorrect); setTimeout(() => {setTextTap(' __ ')}, 500)})()
+  //     : setTextTap(" __ ");
+  // };
+
+  // const settingCharMap = () => {
+  //   curChar === "a"
+  //     ? (function() {setTextMap("a"); playAudio(correct); setCurChar('')})()
+  //     : curChar === "p"
+  //     ? (function() {setTextMap("  p "); playAudio(incorrect);  setTimeout(() => {setTextMap(' __ ')}, 500)})()
+  //     : setTextMap(" __ ");
+  // };
+
+  // const settingCharPat = () => {
+  //   curChar === "p"
+  //   ? (function() {setTextPat("p"); playAudio(correct); setCurChar('')})()
+  //   : curChar === "a"
+  //   ? (function() {setTextPat("  a "); playAudio(incorrect);  setTimeout(() => {setTextPat(' __ ')}, 500)})()
+  //   : setTextPat(" __ ");
+  // };

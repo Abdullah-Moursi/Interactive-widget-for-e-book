@@ -102,6 +102,10 @@
       background: #0fa0c5;
       color: #fff;
     }
+
+    // & .pale {
+    //   background: yellow;
+    // }
   }
 
   & .option-container {
@@ -111,6 +115,7 @@
   }
 
   & img {
+    display: flex;
     width: 70%;
     height: 70%;
     margin: 5%;
@@ -126,14 +131,20 @@
     & .opt-text {
       font-size: 3rem;
 
+      & span{
+        cursor: pointer;
+      }
+
       & .answer {
         text-decoration: underline;
         color: green;
+        cursor: default;
       }
 
       & .not-answer {
         text-decoration: underline;
         color: red;
+        cursor: default;
       }
 
       & .right {
