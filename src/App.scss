@@ -86,7 +86,7 @@
     margin: 5% auto;
 
     & .question,
-    .focus {
+    .focus, .pale {
       cursor: pointer;
       margin: 1%;
       background: none;
@@ -103,9 +103,10 @@
       color: #fff;
     }
 
-    // & .pale {
-    //   background: yellow;
-    // }
+    & .pale {
+      cursor: default;
+      opacity: 0.6;
+    }
   }
 
   & .option-container {
