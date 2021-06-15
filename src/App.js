@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Fade from "react-reveal/Fade";
-import Modal from "./Modal";
-import ModalHelp from "./ModalHelp";
+import {Modal, ModalHelp} from "./Modal";
 import "./App.scss";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -115,7 +114,7 @@ const App = () => {
                   className="img-responsive"
                   alt="resource"
                 ></img>
-                <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                <Modal dummy="portal" open={isOpen} onClose={() => setIsOpen(false)}>
                   <img
                     className="portalImg"
                     alt="dummy"
@@ -130,8 +129,9 @@ const App = () => {
                   className="img-responsive"
                   alt="help"
                 ></img>
-
-                <ModalHelp
+  
+  <ModalHelp
+  help="portalHelp"
                   open={isOpenHelp}
                   onClose={() => setIsOpenHelp(false)}
                 >
