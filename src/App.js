@@ -19,7 +19,7 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenHelp, setIsOpenHelp] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [text, setText] = useState(" __ ");
+  // const [text, setText] = useState("");
   const [pale, setPale] = useState(false);
 
   useEffect(() => {
@@ -35,9 +35,8 @@ const App = () => {
 
   const data = [
     {
-      word: `1 t  ${text}  p`,
-      right: "a",
-      wrong: "p",
+      word: `1 tap`,
+      missedIndex: 3,
       id: 1,
       img: {
         alt: "tap",
@@ -45,9 +44,8 @@ const App = () => {
       },
     },
     {
-      word: `2 ${text}     at`,
-      right: "p",
-      wrong: "a",
+      word: `2 pat`,
+      missedIndex: 2,
       id: 2,
       img: {
         alt: "pat",
@@ -55,9 +53,8 @@ const App = () => {
       },
     },
     {
-      word: `3 m  ${text}  p`,
-      right: "a",
-      wrong: "p",
+      word: `3 map`,
+      missedIndex: 3,
       id: 3,
       img: {
         alt: "map",
@@ -67,29 +64,30 @@ const App = () => {
   ];
 
   const eye = () => {
-    data.map(({ right }) => setText(right));
     setCurChar("");
     setPale(true);
   };
-  const settingChar = (right, wrong) => {
-    curChar === right
+
+
+  const settingChar = (word, missedIndex) => {
+    curChar === word[missedIndex]
       ? (function () {
-          setText(right);
+          // setText(word)
           playAudio(correct);
           setCurChar("");
         })()
-      : curChar === wrong &&
+      : curChar !== word[missedIndex] &&
+        curChar !== "" &&
         (function () {
-          setText(wrong);
+          // setText(word.replace(word[missedIndex], curChar))
           playAudio(incorrect);
           setTimeout(() => {
-            setText(" __ ");
+            word.replace(word[missedIndex], " __ ");
           }, 500);
         })();
   };
 
   const refresh = () => {
-    setText(" __ ");
     setCurChar("");
     setPale(false);
   };
@@ -168,14 +166,15 @@ const App = () => {
                 <div className="line">
                   <div className="opt1">
                     <div className="opt-text">
-                      {data.map(({ id, right, wrong, word, img }) => (
+                      {data.map(({ id, word, missedIndex, img }) => (
                         <span key={id} className="optClick">
-                          {text === right ? (
+                          {word[missedIndex] === curChar ? (
                             <FontAwesomeIcon
                               className="right"
                               icon="check-square"
                             />
-                          ) : text === wrong ? (
+                          ) :  word[missedIndex] !== curChar &&
+                                curChar !== "" ? (
                             <FontAwesomeIcon
                               className="false"
                               icon="times-circle"
@@ -185,17 +184,23 @@ const App = () => {
                           )}
                           {
                             <span
-                              onClick={() => settingChar(right, wrong)}
+                              onClick={() => settingChar(word, missedIndex)}
                               className={`${
-                                text === " __ "
+                                word[missedIndex] === " __ " ||
+                                curChar === ""
                                   ? ""
-                                  : text === wrong
-                                  ? "not-answer"
-                                  : "answer"
+                                  : word[missedIndex] === curChar
+                                  ? "answer"
+                                  : "not-answer"
                               }`}
                             >
                               {" "}
-                              {word}
+                              {word[missedIndex] === curChar || pale
+                                ? word
+                                : word[missedIndex] !== curChar &&
+                                  curChar !== ""
+                                ? word.replace(word[missedIndex], curChar)
+                                : word.replace(word[missedIndex], " __ ")}
                             </span>
                           }
                           <img src={img.src} alt={img.alt} />
