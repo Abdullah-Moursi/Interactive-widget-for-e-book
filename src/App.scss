@@ -102,6 +102,10 @@
       background: #0fa0c5;
       color: #fff;
     }
+
+    // & .pale {
+    //   background: yellow;
+    // }
   }
 
   & .option-container {
@@ -111,6 +115,7 @@
   }
 
   & img {
+    display: flex;
     width: 70%;
     height: 70%;
     margin: 5%;
