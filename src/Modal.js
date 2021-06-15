@@ -21,7 +21,7 @@ const OVERLAY_STYLES = {
     zIndex: 1000
 }
 
-export default function Modal({ onClose, open, children }) {
+const basicPortal = (onClose, open, children, modalName) => {
     if(!open ) return null
     return ReactDom.createPortal(
         <>
@@ -30,7 +30,10 @@ export default function Modal({ onClose, open, children }) {
             <button onClick={onClose}>x</button>
            {children}
         </div>
-        </>,
-        document.getElementById('portal')
+        </>, 
+         document.getElementById(modalName) 
     )
-}
+}  
+
+export  const Modal = ({onClose, open, children, dummy}) => basicPortal(onClose, open, children, dummy)
+export  const ModalHelp = ({ onClose, open, children, help }) =>  basicPortal(onClose, open, children, help)
