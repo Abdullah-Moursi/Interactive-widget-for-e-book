@@ -20,7 +20,6 @@ import incorrect from '../src/incorrect.mp3';
 
 const App = () => {
   const [curChar, setCurChar] = useState("");
-
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenHelp, setIsOpenHelp] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -35,6 +34,8 @@ const App = () => {
   }, [])
 
   library.add(fab, faCheckSquare, faTimes, faTimesCircle);
+
+  const choices = ['a' ,'p'];
 
 
   const data = [
@@ -143,48 +144,38 @@ const App = () => {
         <div className="back">
         <div className="container">
           <div className="question-container">
-            <button
-              onClick={() => setCurChar("a")}
-              className={`${curChar === "a" ? "focus" : "question"}`}
-            >
-              a
-            </button>
-            <button
-              onClick={() => setCurChar("p")}
-              className={`${curChar === "p" ? "focus" : "question"}`}
-            >
-              p
-            </button>
+            {choices.map((i) => (
+              <button 
+              onClick={() => setCurChar(i)}
+              className={`${curChar === i ? "focus" : "question"}`}
+              >
+                {i}
+              </button>
+            ))}
           </div>
           <div className="option-container">
             <div className="line">
               <div className="opt1">
                 <div className="opt-text">
 
-
-
-
-
-
-
-                  {data.map(({ word, right, wrong, img, id}) => (
+                  {data.map((i) => (
                     <span 
-                    key={id}
-                    onClick={() => settingChar(right, wrong)} className="optClick">
-                      {text === right ? (
+                    key={i.id}
+                    onClick={() => settingChar(i.right, i.wrong)} className="optClick">
+                      {text === i.right ? (
                        <FontAwesomeIcon className="right" icon="check-square" />
-                      ) : text === wrong ? (
+                      ) : text === i.wrong ? (
                         <FontAwesomeIcon className="false" icon="times-circle" />
                       ) : (
                         ""
                       )}
                       {
                         <span className={`${
-                          text === " __ " ? '' :text === wrong ? 'not-answer' : 'answer'
+                          text === " __ " ? '' :text === i.wrong ? 'not-answer' : 'answer'
                         }`}
                         >
-                          <img src={img.src} alt={img.alt} />
-                          {word}
+                          <img src={i.img.src} alt={i.img.alt} />
+                          {i.word}
                           </span>
                       }
                     </span>
