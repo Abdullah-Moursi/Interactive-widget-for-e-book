@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Fade from "react-reveal/Fade";
 import {Modal, ModalHelp} from "./Modal";
 import "./App.scss";
@@ -13,8 +13,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import HashLoader from "react-spinners/HashLoader";
 import correct from '../src/correct.mp3';
 import incorrect from '../src/incorrect.mp3';
-
-
 
 
 const App = () => {
@@ -68,8 +66,7 @@ const App = () => {
     curChar === right
       ? (function() {setText(right); playAudio(correct); setCurChar('') })()
       : curChar === wrong
-      ? (function() {setText(wrong); playAudio(incorrect); setTimeout(() => {setText(' __ ')}, 500)})()
-      : setText(" __ ")  
+      && (function() {setText(wrong); playAudio(incorrect); setTimeout(() => {setText(' __ ')}, 500)})() 
   };
 
 
@@ -157,7 +154,7 @@ const App = () => {
                   {data.map((i) => (
                     <span 
                     key={i.id}
-                    onClick={() => settingChar(i.right, i.wrong)} className="optClick">
+                    className="optClick">
                       {text === i.right ? (
                        <FontAwesomeIcon className="right" icon="check-square" />
                       ) : text === i.wrong ? (
@@ -166,7 +163,7 @@ const App = () => {
                         ""
                       )} 
                       {
-                        <span className={`${
+                        <span  onClick={() => settingChar(i.right, i.wrong)} className={`${
                           text === " __ " ? '' :text === i.wrong ? 'not-answer' : 'answer'
                         }`}
                         >       {i.word}
