@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Fade from "react-reveal/Fade";
 import {Modal, ModalHelp} from "./Modal";
 import "./App.scss";
@@ -23,7 +23,7 @@ const App = () => {
   const [isOpenHelp, setIsOpenHelp] = useState(false);
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState(' __ ')
-  // const [pale, setPale] = useState(false)
+  const [pale, setPale] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -35,6 +35,7 @@ const App = () => {
   library.add(fab, faCheckSquare, faTimes, faTimesCircle);
 
   const choices = ['a' ,'p'];
+  
 
 
   const data = [
@@ -55,40 +56,35 @@ const App = () => {
    },
   ];
 
-
-  const refresh = () => {
-    setText(" __ ");
-    setCurChar("");
-  };
-
-  const eye = () => {
+  const eye = () =>  {
     data.map(({right}) => (
       setText(right)
     ))
-    setCurChar("");
+      setCurChar("")
+      setPale(true)  
   }
-
-
-
-
-
-
-
-
-
-  const playAudio = (audio) => {
-    new Audio(audio).play();
-  }
-
-
   const settingChar = (right, wrong) => {
 
     curChar === right
       ? (function() {setText(right); playAudio(correct); setCurChar('') })()
       : curChar === wrong
-      ? (function() {setText(`  ${wrong} `); playAudio(incorrect); setTimeout(() => {setText(' __ ')}, 500)})()
+      ? (function() {setText(wrong); playAudio(incorrect); setTimeout(() => {setText(' __ ')}, 500)})()
       : setText(" __ ")  
   };
+
+
+
+
+
+
+  const refresh = () => {
+    setText(" __ ");
+    setCurChar("");
+    setPale(false)
+  };
+  const playAudio = (audio) => {
+    new Audio(audio).play();
+  }
 
 
 
@@ -146,8 +142,8 @@ const App = () => {
           <div className="question-container">
             {choices.map((i) => (
               <button 
-              onClick={() => setCurChar(i)}
-              className={`${curChar === i ? "focus" : "question"}`}
+              onClick={pale === false ? () => setCurChar(i) :''}
+              className={`${curChar === i ? "focus" : pale? 'pale' : "question"}`}
               >
                 {i}
               </button>
@@ -168,25 +164,18 @@ const App = () => {
                         <FontAwesomeIcon className="false" icon="times-circle" />
                       ) : (
                         ""
-                      )}
+                      )} 
                       {
                         <span className={`${
                           text === " __ " ? '' :text === i.wrong ? 'not-answer' : 'answer'
                         }`}
-                        >
+                        >       {i.word}
+                        </span>
+                    }
                           <img src={i.img.src} alt={i.img.alt} />
-                          {i.word}
-                          </span>
-                      }
+                   
                     </span>
                   ))}
-
-
-
-
-
-
-
 
 
 
@@ -223,51 +212,6 @@ const App = () => {
   ) }
 
 export default App;
-
-
-
-
-
-  // const eye = (right) => {
-  //   data.map(() => {
-  //     ..., word: right
-  //   })
-  //   setText(right)
-  //   setCurChar("");
-  // };
-
-  // const settingPale = () => {
-  //   setPale(true)
-  // }
-
-  // if( curChar === 'p') {settingPale()}
-
-  //TextMap === "a" && TextPat === "p" && TextTap === "a" &&
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
