@@ -3,11 +3,15 @@ import ReactDom from "react-dom";
 
 const MODAL_STYLES = {
   position: "fixed",
+  width: '40%',
+  maxWidth: '1300px',
+  maxHeight: '1000px',
+  height: '40%',
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   backgroundColor: "#FFF",
-  padding: "50px",
+  padding: "15vh",
   zIndex: 1000,
   border: "0.6vh solid #f5821f",
   borderRadius: "4vh",
