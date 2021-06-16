@@ -1,8 +1,8 @@
 .App {
-  max-width: 1000px;
+  max-width: 1300px;
   width: 95%;
-  max-height: 1000px;
-  height: 95%;
+  max-height: 1400px;
+  height: 100vh;
   margin: auto;
 }
 
@@ -53,7 +53,7 @@
 }
 
 .back {
-  background-image: linear-gradient(to bottom, #0fa0c5, #0fa0c5 80%, rgb(222,236,246) 50%);
+  background-image: linear-gradient(to bottom, #0fa0c5, #0fa0c5 77%, rgb(222,236,246) 50%);
 }
 
 .container {
@@ -153,13 +153,13 @@
   display: flex;
   width: 50%;
   height: 50%;
-  & .eye, .refresh {
+  & .reveal, .refresh {
     height: 100%;
     max-height: 1500px;
   max-width: 1500px;
   width: 100%;
   }
-  .eye {
+  .reveal {
     margin-left: 30vh;
     
   }

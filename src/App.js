@@ -19,7 +19,6 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenHelp, setIsOpenHelp] = useState(false);
   const [loading, setLoading] = useState(false);
-  // const [text, setText] = useState("");
   const [pale, setPale] = useState(false);
 
   useEffect(() => {
@@ -63,49 +62,29 @@ const App = () => {
     },
   ];
 
-  // word[missedIndex] === curChar || pale
-  // ?  word
-  // : word[missedIndex] !== curChar && curChar !== ""
-  // ? word.replace(word[missedIndex], curChar)
-  // : word.replace(word[missedIndex], " __ ")
+ 
 
-  // const wordy = () => {
-  // data.map((i, index) => {
-  //   i.word[index][i.missedIndex] === curChar || pale ? setText(i.word[index])
-  //   : i.word[index][i.missedIndex] !== curChar && curChar !== '' ? setText(i.word[index].replace(i.word[index][i.missedIndex], curChar))  : setText(i.word[index].replace(i.word[index][i.missedIndex], ' __ '))
-  // })
-  // }
 
-  // const wordy = (i) => {
-  //   data.map(({word, missedIndex, id}) => {
-
-  //     if ((word[missedIndex] === curChar || pale) && i === id) setText(word)
-  //     if (word[missedIndex] !== curChar && curChar !== '' && i === id) setText(word.replace(word[missedIndex], curChar))
-  //     else setText (word.replace(word[missedIndex], ' __ '))
-  //     })
-  // };
-
-  const eye = () => {
-    setCurChar("");
-    setPale(true);
-  };
 
   const settingChar = (word, missedIndex) => {
     curChar === word[missedIndex]
       ? (function () {
-          // setText(word)
           playAudio(correct);
           setCurChar("");
         })()
       : curChar !== word[missedIndex] &&
         curChar !== "" &&
         (function () {
-          // setText(word.replace(word[missedIndex], curChar))
           playAudio(incorrect);
           setTimeout(() => {
             word.replace(word[missedIndex], " __ ");
           }, 500);
         })();
+  };
+
+  const reveal = () => {
+    setCurChar("");
+    setPale(true);
   };
 
   const refresh = () => {
@@ -205,8 +184,9 @@ const App = () => {
                         <span
                           onClick={() => settingChar(word, missedIndex)}
                           className={`${
-                            word[missedIndex] === " __ " || curChar === ""
-                              ? ""
+                            word[missedIndex] === " __ " 
+                              ? "" 
+                               : curChar === "" && word[missedIndex] !== " __ " ? ''
                               : word[missedIndex] === curChar
                               ? "answer"
                               : "not-answer"
@@ -237,10 +217,10 @@ const App = () => {
                     src="https://educationalrc.org/tasks/3/assets/images/replay_icon.png"
                   />
                 </div>
-                <div className="eye">
+                <div className="reveal">
                   <img
-                    onClick={() => eye()}
-                    alt="eye"
+                    onClick={() => reveal()}
+                    alt="reveal"
                     src="https://educationalrc.org/tasks/3/assets/images/showAns_icon.png"
                   />
                 </div>
@@ -379,3 +359,27 @@ export default App;
 //   ? (function() {setTextPat("  a "); playAudio(incorrect);  setTimeout(() => {setTextPat(' __ ')}, 500)})()
 //   : setTextPat(" __ ");
 // };
+
+
+
+ // word[missedIndex] === curChar || pale
+  // ?  word
+  // : word[missedIndex] !== curChar && curChar !== ""
+  // ? word.replace(word[missedIndex], curChar)
+  // : word.replace(word[missedIndex], " __ ")
+
+  // const wordy = () => {
+  // data.map((i, index) => {
+  //   i.word[index][i.missedIndex] === curChar || pale ? setText(i.word[index])
+  //   : i.word[index][i.missedIndex] !== curChar && curChar !== '' ? setText(i.word[index].replace(i.word[index][i.missedIndex], curChar))  : setText(i.word[index].replace(i.word[index][i.missedIndex], ' __ '))
+  // })
+  // }
+
+  // const wordy = (i) => {
+  //   data.map(({word, missedIndex, id}) => {
+
+  //     if ((word[missedIndex] === curChar || pale) && i === id) setText(word)
+  //     if (word[missedIndex] !== curChar && curChar !== '' && i === id) setText(word.replace(word[missedIndex], curChar))
+  //     else setText (word.replace(word[missedIndex], ' __ '))
+  //     })
+  // };
