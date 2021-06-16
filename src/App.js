@@ -185,45 +185,46 @@ const App = () => {
                 ))}
               </div>
               <div className="option-container">
-                <div className="line">
-                  <div className="opt-text">
-                    {data.map(({ id, word, missedIndex, img }) => (
-                      <span
-                        key={id}
-                        className="optClick"
-                      >
-                        {word[missedIndex] === curChar ? (
-                          <FontAwesomeIcon
-                            className="right"
-                            icon="check-square"
-                          />
-                        ) : word[missedIndex] !== curChar && curChar !== "" ? (
-                          <FontAwesomeIcon
-                            className="false"
-                            icon="times-circle"
-                          />
-                        ) : (
-                          ""
-                        )}
-                        {
-                          <span onClick={() => settingChar(word, missedIndex, )}
-                            className={`${
-                              word[missedIndex] === " __ " || curChar === ""
-                                ? ""
-                                : word[missedIndex] === curChar
-                                ? "answer"
-                                : "not-answer"
-                            }`}
-                          >
-                            {" "}
-                            {word}
-                          </span>
-                        }{" "}
-                        <img key={id} src={img.src} alt={img.alt} />
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                
+                  {data.map(({ id, word, missedIndex, img }) => (
+                    <span key={id} className="optClick">
+                      {word[missedIndex] === curChar ? (
+                        <FontAwesomeIcon
+                          className="right"
+                          icon="check-square"
+                        />
+                      ) : word[missedIndex] !== curChar && curChar !== "" ? (
+                        <FontAwesomeIcon
+                          className="false"
+                          icon="times-circle"
+                        />
+                      ) : (
+                        ""
+                      )}
+                      {
+                        <span
+                          onClick={() => settingChar(word, missedIndex)}
+                          className={`${
+                            word[missedIndex] === " __ " || curChar === ""
+                              ? ""
+                              : word[missedIndex] === curChar
+                              ? "answer"
+                              : "not-answer"
+                          }`}
+                        >
+                          {" "}
+                          {word[missedIndex] === curChar || pale
+                            ? word
+                            : word[missedIndex] !== curChar && curChar !== ""
+                            ? word.replace(word[missedIndex], curChar)
+                            : word.replace(word[missedIndex], " __ ")}
+                        </span>
+                      }{" "}
+                      
+                      <img key={id} src={img.src} alt={img.alt} />
+                      
+                    </span>
+                  ))}
               </div>
             </div>
 
