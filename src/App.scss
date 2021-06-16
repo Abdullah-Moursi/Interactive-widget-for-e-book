@@ -1,7 +1,8 @@
 .App {
   max-width: 1000px;
   width: 95%;
-  height: auto;
+  max-height: 1000px;
+  height: 95%;
   margin: auto;
 }
 
@@ -32,6 +33,7 @@
     margin-left: 50%;
     display: flex;
     width: 20%;
+    height: 20%;
     height: auto;
 
     & .img-responsive {
@@ -44,22 +46,24 @@
 }
 
 .portalImg, .help {
-  height: auto;
-  max-width: 1500px;
+  max-height: 1500px;
+  height: 100%;
+    max-width: 1500px;
   width: 100%;
 }
 
 .back {
-  background-image: linear-gradient(to bottom, #0fa0c5, #0fa0c5 85%, rgb(222,236,246) 50%);
+  background-image: linear-gradient(to bottom, #0fa0c5, #0fa0c5 80%, rgb(222,236,246) 50%);
 }
 
 .container {
   max-width: 1300px;
   width: 95%;
-  height: auto;
+  height: 95%;
+  max-height: 1300px;
   border: 0.6vh solid #f5821f;
   border-radius: 4vh;
-  margin: 2vh auto;
+  margin: 2vh auto ;
   background-color: #fff;
 
   & .option-container,
@@ -99,7 +103,7 @@
 
   & .option-container {
     width: 65%;
-    height: auto;
+    height: 65%;
     margin: 4vh auto;
     font-size: 3vh;
     display: flex;
@@ -108,7 +112,7 @@
     & img {
       display: flex;
       width: 80%;
-      height: auto;
+      height: 80%;
       margin: 5%;
       cursor: default;
   }
@@ -148,9 +152,10 @@
 .footer {
   display: flex;
   width: 50%;
-  height: auto;
+  height: 50%;
   & .eye, .refresh {
-    height: auto;
+    height: 100%;
+    max-height: 1500px;
   max-width: 1500px;
   width: 100%;
   }
@@ -162,7 +167,8 @@
   & img {
     max-width: 150px;
     width: 60%;
-    height: auto;
+    height: 60%;
+    // max-height: ;
     cursor: pointer;
 }
 } 
