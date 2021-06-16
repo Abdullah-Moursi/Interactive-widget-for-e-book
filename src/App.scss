@@ -79,7 +79,8 @@
     margin: 5% auto;
 
     & .question,
-    .focus {
+    .focus,
+    .pale {
       cursor: pointer;
       margin: 1%;
       background: none;
@@ -89,6 +90,10 @@
       font-size: 200%;
       font-weight: 800;
       width: 7%;
+    }
+    & .pale {
+      cursor: default;
+      opacity: 0.6;
     }
 
     & .focus {
