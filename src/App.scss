@@ -111,19 +111,23 @@
     width: 65%;
     height: auto;
     margin: 4vh auto;
+
+
+    & img {
+      display: flex;
+      width: 50%;
+      height: auto;
+      margin: 5%;
+      cursor: default;
+    }
   }
 
-  & img {
-    display: flex;
-    width: 70%;
-    height: auto;
-    margin: 5%;
-    cursor: default;
-  }
+
 
   & .line {
+    display: flex;
     & .optClick {
-      display: inline-block;
+      display: flex;
       font-weight: bold;
       text-align: center;
     }

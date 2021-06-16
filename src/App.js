@@ -63,11 +63,32 @@ const App = () => {
     },
   ];
 
+  // word[missedIndex] === curChar || pale
+  // ?  word
+  // : word[missedIndex] !== curChar && curChar !== ""
+  // ? word.replace(word[missedIndex], curChar)
+  // : word.replace(word[missedIndex], " __ ")
+
+  // const wordy = () => {
+  // data.map((i, index) => {
+  //   i.word[index][i.missedIndex] === curChar || pale ? setText(i.word[index])
+  //   : i.word[index][i.missedIndex] !== curChar && curChar !== '' ? setText(i.word[index].replace(i.word[index][i.missedIndex], curChar))  : setText(i.word[index].replace(i.word[index][i.missedIndex], ' __ '))
+  // })
+  // }
+
+  // const wordy = (i) => {
+  //   data.map(({word, missedIndex, id}) => {
+
+  //     if ((word[missedIndex] === curChar || pale) && i === id) setText(word)
+  //     if (word[missedIndex] !== curChar && curChar !== '' && i === id) setText(word.replace(word[missedIndex], curChar))
+  //     else setText (word.replace(word[missedIndex], ' __ '))
+  //     })
+  // };
+
   const eye = () => {
     setCurChar("");
     setPale(true);
   };
-
 
   const settingChar = (word, missedIndex) => {
     curChar === word[missedIndex]
@@ -151,9 +172,10 @@ const App = () => {
           <main className="back">
             <div className="container">
               <div className="question-container">
-                {choices.map((i) => (
+                {choices.map((i, index) => (
                   <button
-                    onClick={pale === false ? () => setCurChar(i) : ""}
+                    key={index}
+                    onClick={() => pale === false && setCurChar(i)}
                     className={`${
                       curChar === i ? "focus" : pale ? "pale" : "question"
                     }`}
@@ -164,53 +186,47 @@ const App = () => {
               </div>
               <div className="option-container">
                 <div className="line">
-                  <div className="opt1">
-                    <div className="opt-text">
-                      {data.map(({ id, word, missedIndex, img }) => (
-                        <span key={id} className="optClick">
-                          {word[missedIndex] === curChar ? (
-                            <FontAwesomeIcon
-                              className="right"
-                              icon="check-square"
-                            />
-                          ) :  word[missedIndex] !== curChar &&
-                                curChar !== "" ? (
-                            <FontAwesomeIcon
-                              className="false"
-                              icon="times-circle"
-                            />
-                          ) : (
-                            ""
-                          )}
-                          {
-                            <span
-                              onClick={() => settingChar(word, missedIndex)}
-                              className={`${
-                                word[missedIndex] === " __ " ||
-                                curChar === ""
-                                  ? ""
-                                  : word[missedIndex] === curChar
-                                  ? "answer"
-                                  : "not-answer"
-                              }`}
-                            >
-                              {" "}
-                              {word[missedIndex] === curChar || pale
-                                ? word
-                                : word[missedIndex] !== curChar &&
-                                  curChar !== ""
-                                ? word.replace(word[missedIndex], curChar)
-                                : word.replace(word[missedIndex], " __ ")}
-                            </span>
-                          }
-                          <img src={img.src} alt={img.alt} />
-                        </span>
-                      ))}
-                    </div>
+                  <div className="opt-text">
+                    {data.map(({ id, word, missedIndex, img }) => (
+                      <span
+                        key={id}
+                        className="optClick"
+                      >
+                        {word[missedIndex] === curChar ? (
+                          <FontAwesomeIcon
+                            className="right"
+                            icon="check-square"
+                          />
+                        ) : word[missedIndex] !== curChar && curChar !== "" ? (
+                          <FontAwesomeIcon
+                            className="false"
+                            icon="times-circle"
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {
+                          <span onClick={() => settingChar(word, missedIndex, )}
+                            className={`${
+                              word[missedIndex] === " __ " || curChar === ""
+                                ? ""
+                                : word[missedIndex] === curChar
+                                ? "answer"
+                                : "not-answer"
+                            }`}
+                          >
+                            {" "}
+                            {word}
+                          </span>
+                        }{" "}
+                        <img key={id} src={img.src} alt={img.alt} />
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
+
             <footer>
               <div className="footer">
                 <div className="refresh">
