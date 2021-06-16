@@ -133,13 +133,13 @@ const App = () => {
           <div className="question-container">
             <button
               onClick={() => pale === false && setCurChar('a')}
-              className={`${curChar === "a" ? "focus" : "question"}`}
+              className={`${curChar === "a" ? "focus" : pale ? "pale" : "question"}`}
             >
               a
             </button>
             <button
               onClick={() => pale === false && setCurChar('p')}
-              className={`${curChar === "p" ? "focus" : "question"}`}
+              className={`${curChar === "p" ? "focus" : pale ? "pale" : "question"}`}
             >
               p
             </button>
