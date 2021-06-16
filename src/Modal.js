@@ -3,10 +3,10 @@ import ReactDom from "react-dom";
 
 const MODAL_STYLES = {
   position: "fixed",
-  width: '40%',
-  maxWidth: '1300px',
-  maxHeight: '1000px',
-  height: '40%',
+  width: "40%",
+  maxWidth: "1300px",
+  maxHeight: "1000px",
+  height: "40%",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -46,10 +46,7 @@ const basicPortal = (onClose, open, children, modalName) => {
     <>
       <div style={OVERLAY_STYLES}></div>
       <div style={MODAL_STYLES}>
-        <button
-          style={BUTTON_STYLES}
-          onClick={onClose}
-        >
+        <button style={BUTTON_STYLES} onClick={onClose}>
           x
         </button>
         {children}
