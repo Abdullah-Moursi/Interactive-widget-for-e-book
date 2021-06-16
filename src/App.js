@@ -23,6 +23,7 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenHelp, setIsOpenHelp] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [pale, setPale] = useState(false);
 
   useEffect(() => {
     setLoading(true)
@@ -73,11 +74,12 @@ const App = () => {
     setCurChar("");
   };
 
-  const eye = () => {
+  const reveal = () => {
     setTextMap("a");
     setTextPat("p");
     setTextTap("a");
     setCurChar("");
+    setPale(true);
   };
 
   return (
@@ -258,10 +260,10 @@ const App = () => {
                 src="https://educationalrc.org/tasks/3/assets/images/replay_icon.png"
               />
             </div>
-            <div className="eye">
+            <div className="reveal">
               <img
-                onClick={() => eye()}
-                alt="eye"
+                onClick={() => reveal()}
+                alt="reveal"
                 src="https://educationalrc.org/tasks/3/assets/images/showAns_icon.png"
               />
             </div>
