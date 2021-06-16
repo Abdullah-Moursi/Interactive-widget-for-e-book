@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Fade from "react-reveal/Fade";
-import Modal from "./Modal";
-import ModalHelp from "./ModalHelp";
+import {Modal, ModalHelp} from "./Modal";
 import "./App.scss";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -45,7 +44,7 @@ const App = () => {
 
   const settingCharTap = () => {
     curChar === "a"
-      ? (function() {setTextTap("a"); playCorrect() })()
+      ? (function() {setTextTap("a"); playCorrect(); setCurChar(' ') })()
       : curChar === "p"
       ? (function() {setTextTap("  p "); playIncorrect(); setTimeout(() => {setTextTap(' __ ')}, 500)})()
       : setTextTap(" __ ");
@@ -100,7 +99,7 @@ const App = () => {
                   className="img-responsive"
                   alt="resource"
                 ></img>
-                <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                <Modal dummy={'portal'} open={isOpen} onClose={() => setIsOpen(false)}>
                   <img
                     className="portalImg"
                     alt="dummy"
@@ -117,6 +116,7 @@ const App = () => {
                 ></img>
 
                 <ModalHelp
+                help={'portalHelp'}
                   open={isOpenHelp}
                   onClose={() => setIsOpenHelp(false)}
                 >
